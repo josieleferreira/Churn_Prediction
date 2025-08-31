@@ -1,0 +1,12 @@
+# Ambiente virtual
+.venv/
+
+# Arquivos temporários
+*.pyc
+__pycache__/
+.ipynb_checkpoints/
+
+# Ignorar arquivos de dados
+*.csv
+*.xlsx
+data/
