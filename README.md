@@ -1,6 +1,10 @@
-# Churn Prediction Project
+<div align="center">
 
-<img src="docs/churn-rate.webp" alt="Logo do Projeto" width="300"/>
+# Churn Prediction Project  
+
+<img src="docs/churn-rate.webp" alt="Logo do Projeto" width="400"/>
+
+</div>
 
 ---
 ## Visão Geral
