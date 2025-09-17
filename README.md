@@ -1,9 +1,9 @@
-### Churn Prediction Project
+## Churn Prediction Project
 
 Este projeto tem como objetivo prever o cancelamento de clientes (churn) utilizando técnicas de Ciência de Dados e Machine Learning.
 Ao identificar clientes com maior risco de saída, empresas podem reduzir perdas financeiras, aumentar a retenção e direcionar estratégias de marketing e relacionamento de forma mais eficaz.
 
-##### Contexto de Negócio
+### Contexto de Negócio:
 
 O churn é um dos principais desafios para empresas em setores competitivos, como telecom, fintechs, SaaS e varejo.
 
@@ -19,7 +19,7 @@ O churn é um dos principais desafios para empresas em setores competitivos, com
 
     - Contato proativo com clientes em risco
 
-##### Objetivos do Projeto
+### Objetivos do Projeto:
 
 - Identificar clientes propensos ao churn com base em seu histórico e comportamento.
 
@@ -29,7 +29,7 @@ O churn é um dos principais desafios para empresas em setores competitivos, com
 
 - Oferecer insights acionáveis para as áreas de marketing, produto e atendimento.
 
-#####  Etapas do Projeto
+### Etapas do Projeto:
 
 - Análise Exploratória (EDA)
 
@@ -51,7 +51,7 @@ O churn é um dos principais desafios para empresas em setores competitivos, com
 
     - Métricas de negócio: Receita retida, impacto no churn, ROI das ações
 
-#####  Resultados Esperados
+### Resultados Esperados:
 
 - Segmentação de clientes em risco: possibilitando campanhas mais assertivas.
 
@@ -61,7 +61,7 @@ O churn é um dos principais desafios para empresas em setores competitivos, com
 
 - Decisões orientadas por dados: suporte a estratégias de CRM, marketing e produto.
 
-#####  Tecnologias Utilizadas
+###  Tecnologias Utilizadas:
 
 - Python 3.x
 
@@ -73,7 +73,7 @@ O churn é um dos principais desafios para empresas em setores competitivos, com
 
 - XGBoost → algoritmo avançado de boosting
 
-##### Estrutura do Repositório
+### Estrutura do Repositório:
 ```
 Churn_Prediction/
 │── data/                # Dados brutos ou tratados
@@ -83,15 +83,16 @@ Churn_Prediction/
 │── requirements.txt     # Dependências do projeto
 ```
 
-##### Como Executar
+### Como Executar:
 
-- Clone este repositório
+- Clone este repositório:
+
 ```
 git clone https://github.com/usuario/Churn_Prediction.git
 cd Churn_Prediction
 ```
 
-- Crie e ative um ambiente virtual
+- Crie e ative um ambiente virtual:
 
 ```
 python -m venv .venv
@@ -99,17 +100,19 @@ source .venv/bin/activate   # Linux/Mac
 .venv\Scripts\activate      # Windows
 ```
 
-- Instale as dependências
+- Instale as dependências:
+
 ```
 pip install -r requirements.txt
 ```
 
 - Execute o notebook principal:
+
 ```
 jupyter notebook notebooks/Churn_Prediction.ipynb
 ```
 
-##### Próximos Passos
+### Próximos Passos:
 
 - Calibrar modelos para otimizar trade-off entre precisão e recall
 
