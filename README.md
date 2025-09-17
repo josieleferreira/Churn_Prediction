@@ -1,4 +1,15 @@
-## Churn Prediction Project
+# Churn Prediction Project
+
+<img src="docs/churn-rate.webp" alt="Logo do Projeto" width="300"/>
+
+---
+## Visão Geral
+
+Este projeto tem como objetivo **prever o cancelamento de clientes (churn)** utilizando técnicas de **Ciência de Dados e Machine Learning**.  
+Ao identificar clientes com maior risco de saída, empresas podem **reduzir perdas financeiras**, **aumentar a retenção** e **direcionar estratégias de marketing e relacionamento** de forma mais eficaz.
+
+---
+
 
 Este projeto tem como objetivo prever o cancelamento de clientes (churn) utilizando técnicas de Ciência de Dados e Machine Learning.
 Ao identificar clientes com maior risco de saída, empresas podem reduzir perdas financeiras, aumentar a retenção e direcionar estratégias de marketing e relacionamento de forma mais eficaz.
@@ -112,12 +123,11 @@ pip install -r requirements.txt
 jupyter notebook notebooks/Churn_Prediction.ipynb
 ```
 
-### Próximos Passos:
+## 📊 Próximos Passos
 
-- Calibrar modelos para otimizar trade-off entre precisão e recall
-
-- Incorporar métricas financeiras (ROI, CLV, custo de retenção)
-
-- Construir um dashboard de acompanhamento de churn
-
-- Integrar a solução em produção via API ou Streamlit
+- Calibrar modelos para otimizar o **trade-off entre precisão e recall**  
+- Implementar **MLflow** para rastreamento de experimentos, métricas e versões de modelos  
+- Criar pipeline de deploy do modelo em produção via:
+  - **API (FastAPI/Flask)**  
+  - **Dashboard interativo (Streamlit)**  
+- Monitorar o desempenho em produção (**drift detection, métricas de negócio, re-treinamento periódico**)
