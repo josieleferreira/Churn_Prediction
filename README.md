@@ -15,8 +15,6 @@ Ao identificar clientes com maior risco de saída, empresas podem **reduzir perd
 ---
 
 
-Este projeto tem como objetivo prever o cancelamento de clientes (churn) utilizando técnicas de Ciência de Dados e Machine Learning.
-Ao identificar clientes com maior risco de saída, empresas podem reduzir perdas financeiras, aumentar a retenção e direcionar estratégias de marketing e relacionamento de forma mais eficaz.
 
 ### Contexto de Negócio:
 
@@ -127,7 +125,7 @@ pip install -r requirements.txt
 jupyter notebook notebooks/Churn_Prediction.ipynb
 ```
 
-## 📊 Próximos Passos
+## Próximos Passos
 
 - Calibrar modelos para otimizar o **trade-off entre precisão e recall**  
 - Implementar **MLflow** para rastreamento de experimentos, métricas e versões de modelos  
