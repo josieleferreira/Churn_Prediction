@@ -2,7 +2,7 @@
 
 # Churn Prediction Project  
 
-<img src="docs/churn-rate.webp" alt="Logo do Projeto" width="400"/>
+<img src="reports/churn-rate.webp" alt="Logo do Projeto" width="600"/>
 
 </div>
 
