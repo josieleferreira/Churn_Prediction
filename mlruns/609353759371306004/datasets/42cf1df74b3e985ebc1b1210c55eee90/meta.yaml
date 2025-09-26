@@ -1,0 +1,29 @@
+digest: 936ae17b
+name: dataset
+profile: '{"num_rows": 1409, "num_elements": 29589}'
+schema: '{"mlflow_colspec": [{"type": "long", "name": "ID", "required": true}, {"type":
+  "string", "name": "Tipo de empresa", "required": true}, {"type": "long", "name":
+  "Funda\u00e7\u00e3o da empresa", "required": true}, {"type": "string", "name": "Possui
+  mais de um s\u00f3cio", "required": true}, {"type": "string", "name": "Funcion\u00e1rios",
+  "required": true}, {"type": "long", "name": "Meses de perman\u00eancia ", "required":
+  true}, {"type": "string", "name": "Utiliza servi\u00e7os financeiros", "required":
+  true}, {"type": "string", "name": "PossuiContador", "required": false}, {"type":
+  "string", "name": "Faz concilia\u00e7\u00e3o banc\u00e1ria", "required": true},
+  {"type": "string", "name": "Frequ\u00eancia de utiliza\u00e7\u00e3o de feature do
+  sistema: M\u00f3dulo financeiro", "required": true}, {"type": "string", "name":
+  "Frequ\u00eancia de utiliza\u00e7\u00e3o de feature do sistema: Emiss\u00e3o de
+  nota fiscal", "required": true}, {"type": "string", "name": "Frequ\u00eancia de
+  utiliza\u00e7\u00e3o de feature do sistema: Integra\u00e7\u00e3o banc\u00e1ria",
+  "required": true}, {"type": "string", "name": "Frequ\u00eancia de utiliza\u00e7\u00e3o
+  de feature do sistema: M\u00f3dulo de vendas", "required": true}, {"type": "string",
+  "name": "Frequ\u00eancia de utiliza\u00e7\u00e3o de feature do sistema: Relat\u00f3rios",
+  "required": true}, {"type": "string", "name": "Frequ\u00eancia de utiliza\u00e7\u00e3o
+  de feature do sistema: Utiliza\u00e7\u00e3o de APIs de integra\u00e7\u00e3o", "required":
+  true}, {"type": "string", "name": "Contrato", "required": true}, {"type": "long",
+  "name": "Emite boletos", "required": true}, {"type": "string", "name": "Emite boletos.1",
+  "required": true}, {"type": "string", "name": "Tipo de pagamento", "required": true},
+  {"type": "double", "name": "Receita mensal", "required": true}, {"type": "double",
+  "name": "Receita total", "required": false}]}'
+source: '{"tags": {"mlflow.user": "josie", "mlflow.source.name": "mlops_packaged/train.py",
+  "mlflow.source.type": "LOCAL", "mlflow.source.git.commit": "6e2e6478acf2284c9c820481dfff3b46feb5d1e4"}}'
+source_type: code

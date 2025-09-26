@@ -1,0 +1,38 @@
+name: CI Workflow for Churn
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  ci-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies with Poetry
+        run: |
+          pip install poetry
+          poetry install --no-root
+
+      - name: Run black
+        run: poetry run black . --check
+
+      - name: Run pylint
+        env:
+          PYTHONPATH: ${{ github.workspace }}/src
+        run: poetry run pylint src --fail-under=8
+
+      - name: Run pytest
+        env:
+          PYTHONPATH: ${{ github.workspace }}/src
+        run: poetry run pytest src/tests

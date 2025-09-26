@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Projetos/Churn_Prediction/mlruns/609353759371306004/88ae062d060247bc8d86d8b07d8d516f/artifacts
+end_time: 1758673087829
+entry_point_name: ''
+experiment_id: '609353759371306004'
+lifecycle_stage: active
+run_id: 88ae062d060247bc8d86d8b07d8d516f
+run_name: merciful-mare-691
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1758673085274
+status: 4
+tags: []
+user_id: josie

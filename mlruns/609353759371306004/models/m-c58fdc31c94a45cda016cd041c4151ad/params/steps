@@ -1,0 +1,25 @@
+[('pre', ColumnTransformer(transformers=[('num',
+                                 Pipeline(steps=[('imputer', SimpleImputer()),
+                                                 ('scaler',
+                                                  StandardScaler(with_mean=False))]),
+                                 ['ID', 'Fundação da empresa',
+                                  'Meses de permanência ', 'Emite boletos',
+                                  'Receita mensal', 'Receita total']),
+                                ('cat',
+                                 Pipeline(steps=[('imputer',
+                                                  SimpleImputer(strategy='most_frequent')),
+                                                 ('ohe',
+                                                  OneHotEncoder(handle_unknown='ignore'))]),
+                                 ['T...
+                                  'Frequência de utilização de feature do '
+                                  'sistema: Emissão de nota fiscal',
+                                  'Frequência de utilização de feature do '
+                                  'sistema: Integração bancária',
+                                  'Frequência de utilização de feature do '
+                                  'sistema: Módulo de vendas',
+                                  'Frequência de utilização de feature do '
+                                  'sistema: Relatórios',
+                                  'Frequência de utilização de feature do '
+                                  'sistema: Utilização de APIs de integração',
+                                  'Contrato', 'Emite boletos.1',
+                                  'Tipo de pagamento'])])), ('model', LogisticRegression(max_iter=1000))]
