@@ -31,4 +31,4 @@ jobs:
         run: pylint app --fail-under=7
 
       - name: Run pytest
-        run: pytest tests -v
+        run: pytest app/tests -v
