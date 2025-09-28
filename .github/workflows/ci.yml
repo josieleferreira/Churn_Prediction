@@ -40,4 +40,4 @@ jobs:
         run: pylint app --fail-under=7
 
       - name: Run pytest
-        run: pytest app/tests -v
+        run: PYTHONPATH=. pytest app/tests -v
