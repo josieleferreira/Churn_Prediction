@@ -1,6 +1,6 @@
 <p align="center">
   <!-- Status do CI/CD via GitHub Actions -->
-  <img src="https://img.shields.io/github/actions/workflow/status/josieleferreira/Churn_Prediction/ci.yml?branch=main" alt="CI Status">
+  <img src="https://github.com/josieleferreira/Churn_Prediction/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI Workflow">
 
   <!-- Versão de Python -->
   <img src="https://img.shields.io/badge/python-3.11-blue?logo=python&logoColor=white" alt="Python Version">
