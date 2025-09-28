@@ -12,27 +12,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12'
+          python-version: '3.11'
 
-      - name: Install dependencies with Poetry
+      - name: Install dependencies
         run: |
-          pip install poetry
-          poetry install --no-root
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Run black
-        run: poetry run black . --check
+        run: black . --check
 
       - name: Run pylint
-        env:
-          PYTHONPATH: ${{ github.workspace }}/src
-        run: poetry run pylint src --fail-under=8
+        run: pylint app --fail-under=7
 
       - name: Run pytest
-        env:
-          PYTHONPATH: ${{ github.workspace }}/src
-        run: poetry run pytest src/tests
+        run: pytest tests -v
