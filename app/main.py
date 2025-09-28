@@ -1,3 +1,8 @@
+"""
+Módulo principal da API de Churn Prediction usando FastAPI.
+Fornece endpoints para health check e predição de churn a partir de dados de clientes.
+"""
+
 import os
 from typing import List
 from functools import lru_cache
@@ -14,17 +19,15 @@ app = FastAPI(title="Churn Prediction API")
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "churn_prediction.pkl")
 
 
-# Lazy loading do modelo
+@lru_cache(maxsize=1)
 def get_model():
-    """Carrega o modelo somente quando necessário."""
-    global model
-    if "model" not in globals():
-        model = joblib.load(MODEL_PATH)
-    return model
+    """Carrega o modelo somente uma vez (lazy loading com cache)."""
+    return joblib.load(MODEL_PATH)
 
 
-# Schema de entrada
 class Customer(BaseModel):
+    """Modelo que representa um cliente para predição de churn."""
+
     meses_permanencia: int
     receita_mensal: float
     receita_total: float
@@ -34,18 +37,20 @@ class Customer(BaseModel):
 
 
 class PredictRequest(BaseModel):
+    """Estrutura da requisição de predição contendo uma lista de clientes."""
+
     data: List[Customer]
 
 
-# Endpoint raiz (health check)
 @app.get("/")
 def read_root():
+    """Endpoint de health check da API."""
     return {"message": "Churn Prediction API is running 🚀"}
 
 
-# Endpoint de predição
 @app.post("/predict")
 def predict(request: PredictRequest):
+    """Recebe dados de clientes e retorna predição e probabilidades de churn."""
     try:
         df_input = pd.DataFrame(
             [item if isinstance(item, dict) else item.model_dump() for item in request.data]
@@ -55,8 +60,7 @@ def predict(request: PredictRequest):
         preds = model.predict(df_input)
 
         probas = model.predict_proba(df_input)
-        probas = np.array(probas)  # 🔹 garante que vira array
-        probas = probas[:, 1]
+        probas = np.array(probas)[:, 1]  # pega apenas a probabilidade da classe positiva
 
         results = [
             {"prediction": int(pred), "probability": float(proba)}
@@ -64,7 +68,7 @@ def predict(request: PredictRequest):
         ]
         return {"results": results}
     except Exception as e:
-        import traceback
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"Erro na predição: {e}")
-
+        raise HTTPException(
+            status_code=500,
+            detail=f"Erro na predição: {e}",
+        ) from e
