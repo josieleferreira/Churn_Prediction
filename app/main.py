@@ -1,10 +1,12 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+import os
 from typing import List
+from functools import lru_cache
+
 import pandas as pd
 import numpy as np
 import joblib
-import os
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 
 app = FastAPI(title="Churn Prediction API")
 
