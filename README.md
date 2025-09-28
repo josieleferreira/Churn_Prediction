@@ -1,8 +1,36 @@
+<p align="center">
+  <!-- Status do CI/CD via GitHub Actions -->
+  <img src="https://img.shields.io/github/actions/workflow/status/josieleferreira/Churn_Prediction/ci.yml?branch=main" alt="CI Status">
+
+  <!-- Versão de Python -->
+  <img src="https://img.shields.io/badge/python-3.11-blue?logo=python&logoColor=white" alt="Python Version">
+
+  <!-- Docker -->
+  <img src="https://img.shields.io/badge/docker-ready-blue?logo=docker&logoColor=white" alt="Docker">
+
+  <!-- MLflow -->
+  <img src="https://img.shields.io/badge/MLflow-enabled-lightgrey?logo=mlflow&logoColor=black" alt="MLflow">
+
+  <!-- scikit-learn -->
+  <img src="https://img.shields.io/badge/scikit--learn-0.24-blue?logo=scikit-learn&logoColor=white" alt="scikit-learn">
+
+  <!-- FastAPI -->
+  <img src="https://img.shields.io/badge/FastAPI-ready-009688?logo=fastapi&logoColor=white" alt="FastAPI">
+
+  <!-- Streamlit -->
+  <img src="https://img.shields.io/badge/Streamlit-dashboard-FF4B4B?logo=streamlit&logoColor=white" alt="Streamlit">
+
+  <!-- Licença -->
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
+</p>
+
 <div align="center">
 
-# Churn Prediction Project  
+# 📉 Churn Prediction Project 
 
 <img src="reports/churn-rate.webp" alt="Logo do Projeto" width="600"/>
+
+CI/CD • MLFlow • FastAPI • Streamlit • Dockerized 
 
 </div>
 
@@ -76,60 +104,148 @@ O churn é um dos principais desafios para empresas em setores competitivos, com
 
 ###  Tecnologias Utilizadas:
 
-- Python 3.x
+- **Python 3.11**
+- **Pandas, NumPy** → manipulação e análise de dados
+- **Matplotlib, Seaborn** → visualização e insights exploratórios
+- **Scikit-learn** → modelagem e métricas
+- **XGBoost** → algoritmo avançado de boosting
+- **MLflow** → rastreamento de experimentos
+- **FastAPI** → API de predição  
+- **Docker / Docker Compose** → deploy em produção  
+- **Streamlit** → dashboard interativo  
 
-- Pandas, NumPy → manipulação e análise de dados
+---
+## 📜 Estrutura do Projeto
 
-- Matplotlib, Seaborn → visualização e insights exploratórios
-
-- Scikit-learn → modelagem e métricas
-
-- XGBoost → algoritmo avançado de boosting
-
-### Estrutura do Repositório:
 ```
 Churn_Prediction/
-│── data/                # Dados brutos ou tratados
-│── notebooks/           # Notebook principal do projeto
-│── reports/             # Gráficos e análises geradas
-│── README.md            # Documentação
-│── requirements.txt     # Dependências do projeto
+│── app/                 # API FastAPI
+│   ├── main.py
+│   └── churn_prediction.pkl
+│
+│── mlruns/              # Experimentos do MLflow
+│── notebook/            # Notebooks de exploração
+│── reports/             # PDFs, imagens, métricas
+│── src/                 # Código fonte (predict, treino, testes)
+│── streamlit/           # Dashboard interativo
+│── docker-compose.yml   # Orquestração Docker
+│── Dockerfile.api       # Build da API
+│── requirements.txt     # Dependências
+│── README.md            # Este documento
 ```
 
-### Como Executar:
 
-- Clone este repositório:
+## 🤖 MLflow  
+Usado para rastrear experimentos, métricas e versões de modelos.  
 
+Principais métricas:  
+- ROC-AUC  
+- F1-Score  
+- Recall e Precisão  
+- Receita retida estimada  
+
+![MLflow Tracking](reports/mlflow-example.png) <!-- substitua por seu print real -->
+
+---
+
+## ⚙️ API de Predição (FastAPI + Docker)  
+A API disponibiliza o modelo de predição em produção.  
+
+### 🔧 Construir a imagem  
 ```
-git clone https://github.com/usuario/Churn_Prediction.git
-cd Churn_Prediction
-```
-
-- Crie e ative um ambiente virtual:
-
-```
-python -m venv .venv
-source .venv/bin/activate   # Linux/Mac
-.venv\Scripts\activate      # Windows
-```
-
-- Instale as dependências:
-
-```
-pip install -r requirements.txt
-```
-
-- Execute o notebook principal:
-
-```
-jupyter notebook notebooks/Churn_Prediction.ipynb
+docker build -f Dockerfile.api -t churn-api .
 ```
 
-## Próximos Passos
+### 🚀 Rodar a API
+```
+docker run -p 8000:8000 churn-api
+```
 
-- Calibrar modelos para otimizar o **trade-off entre precisão e recall**  
-- Implementar **MLflow** para rastreamento de experimentos, métricas e versões de modelos  
-- Criar pipeline de deploy do modelo em produção via:
-  - **API (FastAPI/Flask)**  
-  - **Dashboard interativo (Streamlit)**  
-- Monitorar o desempenho em produção (**drift detection, métricas de negócio, re-treinamento periódico**)
+Acesse a documentação interativa:
+👉 http://localhost:8000/docs
+
+
+#### 🎬 API em funcionamento
+
+<!-- colocar a imagem aqui -->
+
+
+---
+### 📚 Como testar a API
+
+#### 🔹 Via curl
+```
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d @test_payload.json
+```
+
+#### 🔹 Via Python requests
+```
+import requests
+
+url = "http://localhost:8000/predict"
+payload = {
+    "records": [
+        {
+            "ID": 101,
+            "Tipo de empresa": "Micro empresa",
+            "Fundação da empresa": 2020,
+            "Meses de permanência ": 12,
+            "Receita mensal": 55.0,
+            "Receita total": 600.0,
+            "Contrato": "Mês-a-mês"
+        }
+    ]
+}
+
+response = requests.post(url, json=payload)
+print(response.json())
+```
+
+Resposta esperada:
+```
+{
+  "predictions": ["Sim"],
+  "probabilities": [0.87]
+}
+```
+
+---
+## 📊 Dashboard de Monitoramento (Streamlit)
+
+O dashboard em Streamlit permite:
+
+- Visualizar distribuições de churn
+
+- Monitorar métricas de performance
+
+- Acompanhar impacto financeiro da retenção
+
+### ▶ Rodando o dashboard
+```
+streamlit run streamlit/app.py
+```
+
+### 🎬 Dashboard em funcionamento
+
+<!-- substitua pelo print/filmagem -->
+
+
+---
+## 🚀 Deploy e Monitoramento
+
+- API disponível em FastAPI + Docker
+
+- Dashboard em Streamlit
+
+- MLflow para rastreamento e comparação de modelos
+
+---
+## 📌 Próximos Passos
+
+- Re-treinamento automático (Airflow)
+
+- Monitorar drift de dados em produção
+
+- Criar alertas de negócio para churn elevado
