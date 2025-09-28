@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Projetos Pessoais/Churn_Prediction/mlruns/581645606068038298/aa230dbb9d954b8696b35577127f404b/artifacts
+deleted_time: 1759035137283
+end_time: 1759034163229
+entry_point_name: ''
+experiment_id: '581645606068038298'
+lifecycle_stage: deleted
+run_id: aa230dbb9d954b8696b35577127f404b
+run_name: xgboost_churn
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1759034103668
+status: 3
+tags: []
+user_id: User
