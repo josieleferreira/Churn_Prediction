@@ -15,6 +15,7 @@ try:
 except Exception as e:
     raise RuntimeError(f"Erro ao carregar o modelo: {e}")
 
+
 # Schema de entrada
 class Customer(BaseModel):
     meses_permanencia: int
@@ -24,8 +25,10 @@ class Customer(BaseModel):
     possui_contador: str
     faz_conciliacao_bancaria: str
 
+
 class PredictRequest(BaseModel):
     data: List[Customer]
+
 
 @app.post("/predict")
 def predict(request: PredictRequest):
