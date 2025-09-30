@@ -89,12 +89,22 @@ def read_root():
 
 
 @app.post("/predict")
-def predict(request: PredictRequest):
+async def predict(request: Request):
     """Recebe dados de clientes e retorna predição e probabilidades de churn."""
     try:
-        df_input = pd.DataFrame(
-            [item if isinstance(item, dict) else item.model_dump(by_alias=True) for item in request.data]
-        )
+        body = await request.json()
+
+        # 🔹 Normalizar chaves (remove espaços extras)
+        normalized_data = []
+        for item in body.get("data", []):
+            normalized_item = {k.strip(): v for k, v in item.items()}
+            normalized_data.append(normalized_item)
+
+        # Validar contra o schema Pydantic já normalizado
+        parsed_request = PredictRequest(data=[Customer(**item) for item in normalized_data])
+
+        # Converter para DataFrame
+        df_input = pd.DataFrame([cust.model_dump() for cust in parsed_request.data])
 
         # 🔹 Mapeamento entre nomes amigáveis (API) e nomes originais (pipeline salvo)
         column_map = {
@@ -107,22 +117,19 @@ def predict(request: PredictRequest):
             "fundacao_da_empresa": "Fundação da empresa",
             "utiliza_servicos_financeiros": "Utiliza serviços financeiros",
             "possui_contador": "PossuiContador",
-            "possui_contador ": "PossuiContador",  # garante o caso com espaço
             "faz_conciliacao_bancaria": "Faz conciliação bancária",
         }
-
-        # Renomear colunas vindas da API
         df_input.rename(columns=column_map, inplace=True)
 
-        # 🔹 Garantir que todas as colunas esperadas pelo modelo existam
+        # 🔹 Garantir colunas esperadas
         model = get_model()
         expected_features = model.feature_names_in_
 
         for col in expected_features:
             if col not in df_input.columns:
-                df_input[col] = np.nan  # deixa o pipeline imputar corretamente
+                df_input[col] = np.nan
 
-        # 🔹 Ajustar tipos de dados
+        # 🔹 Ajustar tipos
         numeric_cols = ["Meses de permanência ", "Receita mensal", "Receita total", "Fundação da empresa"]
         categorical_cols = [col for col in expected_features if col not in numeric_cols]
 
@@ -134,14 +141,13 @@ def predict(request: PredictRequest):
             if col in df_input.columns:
                 df_input[col] = df_input[col].astype(str)
 
-        # Reordenar colunas na ordem que o modelo espera
+        # Reordenar colunas
         df_input = df_input[expected_features]
 
         # Predição
         preds = model.predict(df_input)
-        probas = model.predict_proba(df_input)[:, 1]  # prob da classe positiva
+        probas = model.predict_proba(df_input)[:, 1]
 
-        # 🔹 Mapear saída: 1 → "Sim", 0 → "Não"
         predictions = ["Sim" if p == 1 else "Não" for p in preds]
         probabilities = [round(float(p), 2) for p in probas]
 
