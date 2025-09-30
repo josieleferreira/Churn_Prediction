@@ -149,7 +149,18 @@ Principais métricas:
 ---
 
 ## ⚙️ API de Predição (FastAPI + Docker)  
-A API disponibiliza o modelo de predição em produção.  
+A API disponibiliza o modelo de predição em produção.
+API construída em **FastAPI**, framework moderno e rápido para aplicações em Python.
+
+Dois endpoints principais:
+
+  - GET / → Health check (confirma se a API está rodando).
+
+  - POST /predict → Recebe dados de clientes e retorna a predição de churn com probabilidade associada.  
+
+O projeto já suporta execução com Uvicorn e pode ser containerizado via Docker.
+
+
 
 ### 🔧 Construir a imagem  
 ```
@@ -222,22 +233,28 @@ Resposta esperada:
 ---
 ## 📊 Dashboard de Monitoramento (Streamlit)
 
-O dashboard em Streamlit permite:
+Este projeto conta com um dashboard interativo desenvolvido com **Streamlit**, que permite analisar, visualizar e monitorar o desempenho de um modelo de predição de churn ao longo do tempo e conecta experimentos registrados no **MLflow** e exibindo duas abas principais:
 
-- Visualizar distribuições de churn
+- **📊 Gráficos (Avaliação do Modelo)**  
+  - Métricas de classificação (Accuracy, Precision, Recall, F1-Score e ROC AUC)  
+  - Visualizações: Matriz de Confusão e Curva ROC  
 
-- Monitorar métricas de performance
+- **🛠 Monitoramento (Produção)**  
+  - Últimas predições registradas  
+  - Evolução dos scores  
+  - Distribuição das probabilidades  
+  - Taxa prevista de churn com alertas automáticos  
 
-- Acompanhar impacto financeiro da retenção
+Essa separação torna a ferramenta útil tanto para cientistas de dados(validação do modelo) quanto para gestores(monitoramento em produção).
 
 ### ▶ Rodando o dashboard
 ```
 streamlit run streamlit/app.py
 ```
 
-### 🎬 Dashboard em funcionamento
+### 🎬 Dashboard de Predição de Churn
 
-<!-- substitua pelo print/filmagem -->
+[▶️ Assista à demonstração](./reports/streamlit.mp4)
 
 
 ---
