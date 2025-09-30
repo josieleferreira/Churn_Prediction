@@ -144,7 +144,7 @@ Principais métricas:
 - Recall e Precisão  
 - Receita retida estimada  
 
-![MLflow Tracking](reports/mlflow-example.png) <!-- substitua por seu print real -->
+![MLflow Tracking](reports/xgboost_mlflow.jpeg) <!-- substitua por seu print real -->
 
 ---
 
@@ -167,7 +167,7 @@ Acesse a documentação interativa:
 
 #### 🎬 API em funcionamento
 
-<!-- colocar a imagem aqui -->
+[▶️ Assista à demonstração](./reports/API.mp4)
 
 
 ---
@@ -185,18 +185,22 @@ curl -X POST http://localhost:8000/predict \
 import requests
 
 url = "http://localhost:8000/predict"
-payload = {
-    "records": [
-        {
-            "ID": 101,
-            "Tipo de empresa": "Micro empresa",
-            "Fundação da empresa": 2020,
-            "Meses de permanência ": 12,
-            "Receita mensal": 55.0,
-            "Receita total": 600.0,
-            "Contrato": "Mês-a-mês"
-        }
-    ]
+Request body:
+{
+  "data": [
+    {
+      "contrato": "Mensal",
+      "emite_boletos": "Sim",
+      "faz_conciliacao_bancaria": "Automática",
+      "fundacao_da_empresa": 2015,
+      "meses_permanencia": 12,
+      "possui_contador": "Sim",
+      "receita_mensal": 1500,
+      "receita_total": 18000,
+      "tipo_de_empresa": "SaaS",
+      "utiliza_servicos_financeiros": "Não"
+    }
+  ]
 }
 
 response = requests.post(url, json=payload)
@@ -206,8 +210,12 @@ print(response.json())
 Resposta esperada:
 ```
 {
-  "predictions": ["Sim"],
-  "probabilities": [0.87]
+  "predictions": [
+    "Não"
+  ],
+  "probabilities": [
+    0.08
+  ]
 }
 ```
 

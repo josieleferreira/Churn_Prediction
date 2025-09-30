@@ -10,7 +10,7 @@ from sklearn.metrics import (
 import os
 
 # Caminhos dos arquivos
-MODEL_PATH = "app/churn_prediction.pkl"  # onde está seu modelo
+MODEL_PATH = "notebook/pipeline_churn.pkl"  # onde está seu modelo
 TEST_DATA_PATH = "customer_churn_data.csv"  # CSV de clientes para prever
 OUTPUT_PATH = "reports/result_with_predictions.csv"
 METRICS_PATH = "reports/metrics.txt"
