@@ -178,7 +178,7 @@ Acesse a documentação interativa:
 
 #### 🎬 API em funcionamento
 
-[▶️ Assista à demonstração](./reports/API.mp4)
+![Demonstração da API](./reports/API.gif)
 
 
 ---
@@ -254,7 +254,7 @@ streamlit run streamlit/app.py
 
 ### 🎬 Dashboard de Predição de Churn
 
-[▶️ Assista à demonstração](./reports/streamlit.mp4)
+![Demonstração do Dashboard](./reports/streamlit.gif)
 
 
 ---
