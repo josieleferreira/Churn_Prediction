@@ -121,7 +121,7 @@ O churn é um dos principais desafios para empresas em setores competitivos, com
 Churn_Prediction/
 │── app/                 # API FastAPI
 │   ├── main.py
-│   └── churn_prediction.pkl
+│   └── pipeline_churn.pkl
 │
 │── mlruns/              # Experimentos do MLflow
 │── notebook/            # Notebooks de exploração
@@ -144,7 +144,7 @@ Principais métricas:
 - Recall e Precisão  
 - Receita retida estimada  
 
-![MLflow Tracking](reports/xgboost_mlflow.jpeg) <!-- substitua por seu print real -->
+![MLflow Tracking](reports/xgboost_mlflow.jpeg) 
 
 ---
 
@@ -154,13 +154,17 @@ API construída em **FastAPI**, framework moderno e rápido para aplicações em
 
 Dois endpoints principais:
 
-  - GET / → Health check (confirma se a API está rodando).
+  - GET / - Health check (confirma se a API está rodando).
 
-  - POST /predict → Recebe dados de clientes e retorna a predição de churn com probabilidade associada.  
+  - POST /predict - Recebe dados de clientes e retorna a predição de churn com probabilidade associada.  
 
-O projeto já suporta execução com Uvicorn e pode ser containerizado via Docker.
+O projeto já suporta execução com **Uvicorn** e pode ser containerizado via **Docker**.
 
 
+### 💻 Rodar direto com Uvicorn
+```
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
 
 ### 🔧 Construir a imagem  
 ```
