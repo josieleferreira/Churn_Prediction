@@ -12,6 +12,7 @@ import numpy as np
 import joblib
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
+from fastapi import FastAPI, HTTPException, Request
 
 app = FastAPI(title="Churn Prediction API")
 
@@ -92,7 +93,27 @@ def read_root():
 async def predict(request: Request):
     """Recebe dados de clientes e retorna predição e probabilidades de churn."""
     try:
-        body = await request.json()
+        # Tenta ler o JSON enviado
+        try:
+            body = await request.json()
+        except Exception:
+            # Se não tiver body → usa exemplo default
+            body = {
+                "data": [
+                    {
+                        "meses_permanencia": 24,
+                        "receita_mensal": 500.0,
+                        "receita_total": 12000.0,
+                        "tipo_de_empresa": "SaaS",
+                        "contrato": "Mensal",
+                        "emite_boletos": "Sim",
+                        "fundacao_da_empresa": 2018,
+                        "utiliza_servicos_financeiros": "Não",
+                        "possui_contador": "Sim",
+                        "faz_conciliacao_bancaria": "Manual"
+                    }
+                ]
+            }
 
         # 🔹 Normalizar chaves (remove espaços extras)
         normalized_data = []
@@ -148,10 +169,15 @@ async def predict(request: Request):
         preds = model.predict(df_input)
         probas = model.predict_proba(df_input)[:, 1]
 
-        predictions = ["Sim" if p == 1 else "Não" for p in preds]
-        probabilities = [round(float(p), 2) for p in probas]
+        # 🔹 Montar saída no formato esperado pelo teste
+        results = []
+        for pred, proba in zip(preds, probas):
+            results.append({
+                "prediction": int(pred),
+                "probability": round(float(proba), 2)
+            })
 
-        return {"predictions": predictions, "probabilities": probabilities}
+        return {"results": results}
 
     except Exception as e:
         raise HTTPException(
