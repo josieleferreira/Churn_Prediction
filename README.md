@@ -190,9 +190,10 @@ Acesse a documentação interativa:
 
 #### 🔹 Via curl
 ```
-curl -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d @test_payload.json
+curl -X 'POST' \
+  'http://localhost:8000/predict' \
+  -H 'accept: application/json' \
+  -d ''
 ```
 
 #### 🔹 Via Python requests
@@ -225,11 +226,11 @@ print(response.json())
 Resposta esperada:
 ```
 {
-  "predictions": [
-    "Não"
-  ],
-  "probabilities": [
-    0.08
+  "results": [
+    {
+      "prediction": 0,
+      "probability": 0.2
+    }
   ]
 }
 ```
