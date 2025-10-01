@@ -28,7 +28,7 @@
 
 # 📉 Churn Prediction Project 
 
-<img src="reports/churn-rate.webp" alt="Logo do Projeto" width="600"/>
+<img src="reports/churn-rate.jpeg" alt="Logo do Projeto" width="600"/>
 
 CI/CD • MLFlow • FastAPI • Streamlit • Dockerized 
 
@@ -74,23 +74,33 @@ O churn é um dos principais desafios para empresas em setores competitivos, com
 
 - Análise Exploratória (EDA)
 
-    - Compreensão do perfil dos clientes
+    - Compreensão do perfil dos clientes.
 
-    - Identificação de padrões relacionados ao cancelamento
+    - Identificação de padrões relacionados ao cancelamento.
 
-    - Métricas descritivas de retenção
+    - Métricas descritivas de retenção.
 
 - Modelagem Preditiva
 
-    - Algoritmos de classificação (Regressão Logística, XGBoost)
+    - Algoritmos de classificação (**Regressão Logística**, **XGBoost**).
 
-    - Comparação de performance entre modelos
+    - Comparação de performance entre modelos.
 
 - Avaliação de Impacto
 
-    - Métricas técnicas: ROC-AUC, F1-Score, Precisão e Recall
+    - Métricas técnicas: ROC-AUC, F1-Score, Precisão e Recall.
 
-    - Métricas de negócio: Receita retida, impacto no churn, ROI das ações
+    - Métricas de negócio: Receita retida, impacto no churn, ROI das ações.
+
+- MLOps & Deploy
+    - MLflow: tracking de experimentos, versionamento de modelos e métricas.
+
+    - FastAPI: desenvolvimento de uma API para disponibilizar o modelo em produção.
+
+    - Streamlit: criação de dashboard interativo para visualização de resultados e predições.
+
+    - CI/CD com GitHub Actions: testes automatizados, integração contínua e entrega contínua (build e deploy de imagens Docker).
+
 
 ### Resultados Esperados:
 
@@ -119,19 +129,46 @@ O churn é um dos principais desafios para empresas em setores competitivos, com
 
 ```
 Churn_Prediction/
-│── app/                 # API FastAPI
-│   ├── main.py
-│   └── pipeline_churn.pkl
 │
-│── mlruns/              # Experimentos do MLflow
-│── notebook/            # Notebooks de exploração
-│── reports/             # PDFs, imagens, métricas
-│── src/                 # Código fonte (predict, treino, testes)
-│── streamlit/           # Dashboard interativo
-│── docker-compose.yml   # Orquestração Docker
-│── Dockerfile.api       # Build da API
-│── requirements.txt     # Dependências
-│── README.md            # Este documento
+├── .github/                    # Configurações de workflows do GitHub Actions (CI/CD)
+│
+├── app/                        # Código da API FastAPI
+│   ├── main.py                 # Script principal da API
+│   └── tests/                  # Testes automatizados
+│       ├── test_api.py
+│       ├── test_dummy.py
+│       ├── test_predict.py
+│       └── __init__.py
+│
+├── mlruns/                     # Diretório de tracking de experimentos do MLflow
+│
+├── notebook/                   # Notebooks de experimentação
+│   ├── Churn_Prediction.ipynb
+│   └── pipeline_churn.pkl      # Modelo treinado salvo
+│
+├── reports/                    # Relatórios, resultados e mídias
+│   ├── API.gif                 # Demonstração da execução da API
+│   ├── streamlit.gif           # Demonstração do dashboard
+│   ├── confusion_matrix.png 
+│   ├── roc_curve.png
+│   ├── churn-rate.jpeg
+│   ├── xgboost_mlflow.jpeg
+│   └── Apresentação Churn.pdf
+│
+├── src/                       # Código auxiliar (pré-processamento, features, etc.)
+│
+├── streamlit/                 # Código do dashboard interativo
+│   ├── app.py
+│   └── config.toml
+│
+├── .gitignore
+├── docker-compose.yml         # Orquestração multi-contêiner
+├── Dockerfile                 # Build da API (FastAPI)
+├── Dockerfile.api             # Build alternativo para API
+├── makefile                   # Automação de tarefas
+├── MLflow.db                  # Banco local do MLflow
+├── README.md                  # Documentação do projeto
+└── requirements.txt           # Dependências Python
 ```
 
 
