@@ -1,0 +1,7 @@
+[theme]
+# Tom inspirado no slide
+primaryColor = "#000000"              # Preto para textos e destaques
+backgroundColor = "#f9f7f2"           # Bege claro do slide
+secondaryBackgroundColor = "#f0eee9"  # Sidebar um pouco mais escura
+textColor = "#000000"                 # Texto preto
+font = "sans serif"

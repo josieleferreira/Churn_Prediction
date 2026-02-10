@@ -18,4 +18,6 @@ streamlit
 requests
 plotly
 
-.xlsx
+black[jupyter]
+pylint
+pytest

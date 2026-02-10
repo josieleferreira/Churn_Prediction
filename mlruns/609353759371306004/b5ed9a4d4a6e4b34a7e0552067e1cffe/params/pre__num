@@ -1,2 +1,0 @@
-Pipeline(steps=[('imputer', SimpleImputer()),
-                ('scaler', StandardScaler(with_mean=False))])

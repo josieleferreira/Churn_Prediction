@@ -13,9 +13,13 @@ from sklearn.metrics import (
     roc_auc_score,
 )
 
-# Caminhos padrão (configuráveis via env ou argumentos)
 BASE = Path(__file__).resolve().parent.parent.parent
-MODEL_PATH = os.environ.get("MODEL_PATH", str(BASE / "app" / "churn_prediction.pkl"))
+_default_model = (
+    BASE / "notebook" / "pipeline_churn.pkl"
+    if (BASE / "notebook" / "pipeline_churn.pkl").exists()
+    else BASE / "app" / "churn_prediction.pkl"
+)
+MODEL_PATH = os.environ.get("MODEL_PATH", str(_default_model))
 OUTPUT_PATH = os.environ.get(
     "OUTPUT_PATH", str(BASE / "reports" / "result_with_predictions.csv")
 )
@@ -33,13 +37,11 @@ def _prepare_data(data: pd.DataFrame) -> pd.DataFrame:
     """Aplica o mesmo pré-processamento do notebook antes da predição."""
     df = data.copy()
 
-    # Remove colunas redundantes
     if "Emite boletos.1" in df.columns:
         df = df.drop(columns=["Emite boletos.1"])
     if "ID" in df.columns:
         df = df.drop(columns=["ID"])
 
-    # Preenche Receita total quando ausente
     if all(c in df.columns for c in ["Receita total", "Receita mensal", "Meses de permanência"]):
         mask = df["Receita total"].isna()
         df.loc[mask, "Receita total"] = (
@@ -78,7 +80,6 @@ def make_predictions(
 
     model = load_model(MODEL_PATH)
 
-    # Detecta formato do arquivo
     path = Path(data_path)
     if not path.exists():
         raise FileNotFoundError(f"Arquivo não encontrado: {data_path}")

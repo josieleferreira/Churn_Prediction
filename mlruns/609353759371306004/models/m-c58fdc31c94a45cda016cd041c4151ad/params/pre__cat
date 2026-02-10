@@ -1,2 +1,0 @@
-Pipeline(steps=[('imputer', SimpleImputer(strategy='most_frequent')),
-                ('ohe', OneHotEncoder(handle_unknown='ignore'))])
